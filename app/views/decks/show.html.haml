@@ -1,0 +1,6 @@
+%h1= @deck.name
+%h2= @deck.price
+%p= @deck.description
+- @deck.cards.each do |card|
+  = image_tag card.image_url
+

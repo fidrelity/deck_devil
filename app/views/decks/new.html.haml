@@ -1,0 +1,14 @@
+= form_for @deck do |f|
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.label :price
+    = f.number_field :price, min: 0, step: 0.01
+
+  %p
+    = f.label :cards, "Cards List"
+    = f.text_area :cards, value: @cards_list || ""
+
+  = f.submit
+
