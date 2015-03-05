@@ -1,14 +1,119 @@
-= form_for @deck do |f|
-  %p
-    = f.label :name
-    = f.text_field :name
-  %p
-    = f.label :price
-    = f.number_field :price, min: 0, step: 0.01
+.row
+  .col-md-12
+    %h1 Sell your deck on Deck Devil
+    .panel.panel-default
+      .panel-heading
+        Basic info
+      .panel-body
+        You can list your deck for free on Deck Devil. As soon as somebody buys it, we will notify you with the shipping destination and take a small fee on the sales price.
 
-  %p
-    = f.label :cards, "Cards List"
-    = f.text_area :cards, value: @cards_list || ""
+.row
+  .col-md-12
+    = form_for @deck do |f|
+      .row
+        .col-md-5.pull-right
+          .panel.panel-default
+            .panel-heading
+              Naming your deck properly
+            .panel-body
+              Your deck name is the first thing a customer sees. Make it interesting! Include the main card or combo name in the title.
+        .col-md-7
+          .form-group
+            = f.label :name, "What's your deck name?"
+            = f.text_field :name, class: "form-control input-lg"
 
-  = f.submit
+      .form-group
+        .row
+          .col-md-5.pull-right
+            .panel.panel-default
+              .panel-heading Fill this box like:
+              .panel-body
+                4x Lord of the Undead
+                %br
+                2x Nightmare
+                %br
+                1x Ajani Goldmane
+                %br
+                22x swamp
+          .col-md-7
+            = f.label :cards_list, "Cards List"
+            = f.text_area :cards_list, value: @cards_list || "", rows: 10, class: "form-control"
 
+      .form-group
+        .row
+          .col-md-3
+            = f.label :condition_from
+            = f.select :condition_from, condition_options, {}, class: "form-control"
+          .col-md-3
+            = f.label :condition_to, "to"
+            = f.select :condition_to, condition_options, {}, class: "form-control"
+
+      .form-group
+        .row
+          .col-md-5.pull-right
+            .panel.panel-default
+              .panel-heading
+                Add details in the description
+              .panel-body
+                %p
+                  This is the most important part for a potential buyer to make his decision. Give insights into how your deck works and why it's fun to play.
+                %p
+                  Make sure your customers understand what they are buying. Include the condition of valuable cards, shipping details and a play guide to help beginners enjoy your deck.
+          .col-md-7
+            = f.label :description
+            = f.text_area :description, rows: 9, class: "form-control"
+
+
+
+
+      .row
+        .col-md-12
+          %h3 Let's talk about money
+      .form-group
+        .row
+          .col-md-5.pull-right
+            .panel.panel-default
+              .panel-heading
+                Name a price for your deck
+              .panel-body
+                Pricing is important. Be sure to set a price according to the cards value. Deck Devil will take a 10% fee of that price when you sell it.
+          .col-md-4
+            = f.label :price, "Price in €"
+            = f.number_field :price, min: 0, step: 0.01, class: "form-control price"
+          .col-md-3
+            = label_tag :earn, "You'll earn:"
+            = text_field_tag :earn, "0 €", class: "form-control disabled earn", disabled: :disabled
+
+      .row
+        .col-md-12
+          %h3 Where do you ship to?
+      .row
+        .col-md-12
+          .panel.panel-default
+            .panel-heading
+              Decide where you offer your deck
+            .panel-body
+              %p
+                You'll need to take care of the shipping of your deck. Make sure you know how much it costs you to ship different regions.
+              %p
+                The more regions and countries you offer, the easier it is to find a buyer for your deck.
+
+      .form-group.shipping_form
+        = f.fields_for :shipping_options do |shipping_form|
+          .row.shipping_option
+            .col-md-6
+              = shipping_form.label :region_code, "Select a location"
+              = shipping_form.select :region_code, shipping_location_options, {}, class: "form-control"
+            .col-md-6
+              = shipping_form.label :value, "Set a price for this region (€)"
+              = shipping_form.number_field :value, class: "form-control"
+
+      .form-group
+        .row
+          .col-md-12
+            .add-shipping-option.btn.btn-default.pull-right
+              + Add another option
+
+      %hr
+      .hero
+        = f.submit "Sell this deck", class: "btn btn-primary btn-lg"

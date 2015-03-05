@@ -12,7 +12,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'haml'
 gem 'haml-rails'
 gem 'typhoeus'
-
+gem "therubyracer"
+gem "less-rails"
+gem 'railsstrap'
+gem 'underscore-rails'
+gem 'countries'
 
 group :development, :test do
   gem 'byebug'

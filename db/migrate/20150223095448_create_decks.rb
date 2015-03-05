@@ -3,9 +3,11 @@ class CreateDecks < ActiveRecord::Migration
     create_table :decks do |t|
       t.string :name
       t.text :description
-      t.text :condition
+      t.string :condition_from
+      t.string :condition_to
       t.float :price
-      t.json :cards
+      t.json :data
+      t.text :cards_list
 
       t.timestamps null: false
     end

@@ -6,6 +6,7 @@ module Api
       request = Typhoeus::Request.new(full_url(card))
       requests[card] = request
       hydra.queue(request)
+      request
     end
 
     def run

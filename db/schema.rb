@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223095448) do
+ActiveRecord::Schema.define(version: 20150226142558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,11 +30,23 @@ ActiveRecord::Schema.define(version: 20150223095448) do
   create_table "decks", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.text     "condition"
+    t.string   "condition_from"
+    t.string   "condition_to"
     t.float    "price"
-    t.json     "cards"
+    t.json     "data"
+    t.text     "cards_list"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "shipping_options", force: :cascade do |t|
+    t.integer  "deck_id"
+    t.string   "region_code"
+    t.float    "value"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "shipping_options", ["deck_id"], name: "index_shipping_options_on_deck_id", using: :btree
 
 end
