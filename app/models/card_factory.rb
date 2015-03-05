@@ -7,11 +7,11 @@ class CardFactory
   end
 
   def perform!
-    @cards.each do |card_name, _|
-      api.queue(card_name)
+    @cards.each do |card_name, card|
+      card[:request] = api.queue(card_name)
     end
     api.run
-    parse_responses(api.responses)
+    parse_responses
   end
 
   private
@@ -24,7 +24,7 @@ class CardFactory
     cards_with_count = Array(cards).collect do |card|
       next if card.empty?
       count, name = parse_card(card)
-      [name, { name: name, count: count }]
+      [name, { name: name, times: count }]
     end
     Hash[cards_with_count]
   end
@@ -37,26 +37,29 @@ class CardFactory
     end
   end
 
-  def parse_responses(responses)
-    responses.map { |name, response| parse_response(response, name) }
+  def parse_responses
+    # responses.map { |name, response| parse_response(response, name) }
+    @cards.map { |card_name, card| parse_response(card) }
   end
 
-  def parse_response(response, name)
+  def parse_response(card)
+    response = card[:request].response
     cards = JSON.parse(response.body)
     if response.code == 200 && cards.any?
-      to_hash(cards.first)
+      to_hash(cards.first, card)
     else
-      { name: name }
+      { name: card[:name], times: card[:times] }
     end
   end
 
-  def to_hash(card)
-    return unless card
+  def to_hash(card_data, card)
+    return unless card_data
     {
-      name: card["name"],
-      colors: card["colors"],
-      multiverse_id: card["id"],
-      data: card
+      name: card_data["name"],
+      colors: card_data["colors"],
+      multiverse_id: card_data["id"],
+      times: card[:times],
+      data: card_data
     }
   end
 end

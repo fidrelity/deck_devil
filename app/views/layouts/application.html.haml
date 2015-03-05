@@ -6,4 +6,31 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = yield
+    .container
+      %nav.navbar.navbar-inverse
+        .container-fluid
+          .navbar-header
+            %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %a.navbar-brand{:href => "#"} Deck Devil
+          #navbar.navbar-collapse.collapse
+            %ul.nav.navbar-nav
+              %li.active
+                = link_to "Browse decks", root_path
+
+            %ul.nav.navbar-nav.navbar-right
+              = link_to "Sell your deck", new_deck_path, class: "btn btn-default navbar-btn pull-left extra-margin-right"
+
+              %li
+                %a{href: "#"}
+                  Profile
+          / /.nav-collapse
+        / /.container-fluid
+
+
+
+    .container
+      = yield

@@ -1,6 +1,61 @@
-%h1= @deck.name
-%h2= @deck.price
-%p= @deck.description
-- @deck.cards.each do |card|
-  = image_tag card.image_url
+.row
+  .col-md-12
+    %h1= @deck.name
+    .row
+      .col-md-12
+        sold by
+        %a
+          Deck Devil
+          = image_tag("https://www.gravatar.com/avatar/26f164b906365401db3c80cac3ba5dfe?s=128&d=identicon&r=PG", class: "img-circle", width: 30)
+.row
+  .col-md-3.offset-md-1
+    %h2 Cards included
+    .panel.panel-default
+      .panel-heading
+        Cards included in this deck
+      .panel-body
+        - @deck.cards.each do |card|
+          .row
+            .col-md-12
+              %p.card{"data-toggle" => "popover", "data-title" => card.name, "data-content" =>"<img src='#{card.image_url}' width='180'>", "data-html" => "true", "data-trigger" => "hover"}
+                = "#{card.times}x #{card.name}"
 
+  .col-md-6
+    %h2 About this deck
+    = simple_format @deck.description
+  .col-md-3
+    .panel.panel-primary
+      .panel-heading
+        Pricing Information
+      .panel-body
+        .row
+          .col-md-12
+            %h4
+              = number_to_currency @deck.price
+              .label.label-success.pull-right
+                Ships to Spain
+        .row
+          .col-md-7
+            +
+            = number_to_currency 9.9
+            Delivery
+        .row
+          .col-md-8
+            %a Change location
+        %hr
+        .row
+          .col-md-12
+            .btn.btn-primary.btn-lg.btn-block
+              Buy this deck
+      .panel-footer
+        .row
+          .col-md-12
+            .text-info
+              We only work with trusted sellers
+            That's why we have 100% happy customers!
+
+
+:javascript
+  $(document).ready(function() {
+    $(".card").popover()
+  });

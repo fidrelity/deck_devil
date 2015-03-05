@@ -2,7 +2,7 @@ class DecksController < ApplicationController
 
   def new
     @deck = Deck.new
-    @deck.cards.build
+    @deck.shipping_options.build
   end
 
   def create
@@ -11,7 +11,7 @@ class DecksController < ApplicationController
     if @deck.save
       redirect_to deck_path(@deck)
     else
-      @cards_list = params[:deck][:cards]
+      @cards_list = params[:deck][:cards_list]
       render :new
     end
   end
@@ -27,24 +27,14 @@ class DecksController < ApplicationController
   private
 
   def deck_params
-    params.require(:deck).permit(:name, :price, :cards_attributes)
+    params.require(:deck).permit(
+      :name, :price, :condition_from, :condition_to, :cards_list, :description,
+      shipping_options_attributes: [:region_code, :value]
+    )
   end
 
   def deck_cards_params
-    card_names = params[:deck][:cards].split("\r\n")
+    card_names = params[:deck][:cards_list].split("\r\n")
     CardFactory.new(card_names).perform!
   end
-end
-
-def test(reg)
-  p "4x Howling Banshee".match(reg)
-  p "4 Howling Banshee".match(reg)
-  p "4x   Howling Banshee".match(reg)
-end
-
-
-def anti_test(reg)
-p "panzer x4".match(reg)
-p "4 panzer".match(reg)
-p "3xajani".match(reg)
 end
