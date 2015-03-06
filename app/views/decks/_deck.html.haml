@@ -1,0 +1,50 @@
+.list-group-item
+  .row
+    .col-md-8
+      .row
+        .col-md-12
+          %h2.list-group-item-heading= link_to deck.name, deck_path(deck)
+          .row
+            .col-md-12
+              sold by
+              %a
+                Deck Devil
+                = image_tag("https://www.gravatar.com/avatar/26f164b906365401db3c80cac3ba5dfe?s=128&d=identicon&r=PG", class: "img-circle", width: 30)
+      .row
+        .col-md-12
+          = simple_format deck.description
+
+    .col-md-4
+      .panel.panel-default
+        .panel-heading
+          Details
+        .panel-body
+          %table.table
+            %tbody
+              %tr
+                %td Delivery
+                %td
+                  .label.label-success.pull-right
+                    Ships to Spain
+              %tr
+                %td Condition
+                %td.text-right= "#{deck.condition_from} - #{deck.condition_to}"
+              %tr
+                %td # Cards
+                %td.text-right
+                  = deck.cards.count
+              %tr
+                %td Price
+                %td.text-right
+                  = number_to_currency deck.price
+        .panel-footer
+          .row
+            .col-md-12
+              = link_to deck_path(deck) do
+                .btn.btn-default.btn-block
+                  View deck information
+
+
+
+
+
