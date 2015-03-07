@@ -1,0 +1,22 @@
+.panel.panel-default
+  .panel-heading
+    = deck.name
+  .panel-body
+    %table.table
+      %tbody
+        %tr
+          %td Delivery
+          %td
+            .label.label-success.pull-right
+              Ships to Spain
+        %tr
+          %td Condition
+          %td.text-right= "#{deck.condition_from} - #{deck.condition_to}"
+        %tr
+          %td # Cards
+          %td.text-right
+            = deck.cards.count
+        %tr
+          %td Price
+          %td.text-right
+            = number_to_currency deck.price
