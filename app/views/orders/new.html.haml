@@ -1,0 +1,12 @@
+.row
+  .col-md-12
+    %h1 Get your deck now
+.row
+  .col-md-6
+    = form_tag orders_path do
+      = label_tag :price
+      = text_field_tag :price, @deck.price, disabled: :disabled
+      %script.stripe-button{"data-amount" => @deck.price * 100, "data-description" => "Deck Devil checkout", "data-key" => Rails.configuration.stripe[:publishable_key], :src => "https://checkout.stripe.com/checkout.js"}
+
+  .col-md-6
+    = render partial: "deck", locals: { deck: @deck }

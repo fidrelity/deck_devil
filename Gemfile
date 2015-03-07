@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'dotenv-rails', :groups => [:development, :test]
 
 gem 'rails', '4.2.0'
 gem 'pg'
@@ -17,6 +18,7 @@ gem "less-rails"
 gem 'railsstrap'
 gem 'underscore-rails'
 gem 'countries'
+gem 'stripe'
 
 group :development, :test do
   gem 'byebug'
