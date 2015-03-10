@@ -19,6 +19,7 @@ gem 'railsstrap'
 gem 'underscore-rails'
 gem 'countries'
 gem 'stripe'
+gem 'sorcery'
 
 group :development, :test do
   gem 'byebug'

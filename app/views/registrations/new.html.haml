@@ -1,0 +1,11 @@
+.row
+  .col-md-6
+    = form_for @user, url: registrations_path do |f|
+      .form-group
+        = f.label :email
+        = f.email_field :email, class: 'form-control'
+        = f.label :password
+        = f.password_field :password, class: 'form-control'
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class: 'form-control'
+      = f.submit "Join the Navy", class: "btn btn-primary btn-lg"
