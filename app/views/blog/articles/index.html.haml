@@ -1,0 +1,5 @@
+.row
+  .col-md-12
+    .list-group
+      = render partial: "article", collection: @articles
+        - @articles.each do |article|
