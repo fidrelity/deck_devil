@@ -19,6 +19,8 @@ gem 'railsstrap'
 gem 'underscore-rails'
 gem 'countries'
 gem 'stripe'
+gem 'redcarpet' # For the Markdown parsing
+gem 'pygments.rb' # Syntax highlighting
 
 group :development, :test do
   gem 'byebug'
