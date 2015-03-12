@@ -1,5 +1,17 @@
 .row
-  .col-md-12
+  .col-md-8
     .list-group
       = render partial: "article", collection: @articles
         - @articles.each do |article|
+  .col-md-3.col-md-offset-1
+    .panel.panel-default
+      .panel-heading
+        About Deck Devil
+      .panel-body
+        .pull-right= image_tag("https://www.gravatar.com/avatar/26f164b906365401db3c80cac3ba5dfe?s=128&d=identicon&r=PG", class: "img-circle", width: 40)
+        %em
+          I am writing about my experience as a passionate
+          %strong Magic: The Gathering
+          player and pass my knowledge on to other players.
+        %hr
+        Deck Devil aims to bring great decks and comprehensive guides to new players to help them get started and enjoy the game from Day 1.

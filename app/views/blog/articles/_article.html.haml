@@ -4,9 +4,9 @@
       = render partial: "meta", locals: { article: article }
   .row
     .col-md-12
-      %h1= link_to article.title, blog_article_path(article)
+      %h2= link_to article.title, blog_article_path(article)
   .row
-    .col-md-6
+    .col-md-12
       = preserve_markdown article.excerpt
       - if article.has_more_text?
         %p= link_to "Continue reading →", blog_article_path(article)
