@@ -11,6 +11,10 @@ class Blog::Article
     remove_yaml_frontmatter_from @content
   end
 
+  def content_without_markers
+    content.sub(/<!--more-->/,"")
+  end
+
   def excerpt
     content.split('<!--more-->').first
   end

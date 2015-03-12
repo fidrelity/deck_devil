@@ -21,6 +21,7 @@ gem 'stripe'
 gem 'colorize', '~> 0.6.0'
 gem 'redcarpet' # For the Markdown parsing
 gem 'pygments.rb' # Syntax highlighting
+gem 'shareable'
 
 group :development, :test do
   gem 'byebug'
