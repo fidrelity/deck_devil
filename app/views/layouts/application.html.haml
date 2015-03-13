@@ -4,6 +4,7 @@
     %title DeckDevil
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application'
+    %link{href: 'http://fonts.googleapis.com/css?family=Lobster', rel: 'stylesheet', type: 'text/css' }
     = csrf_meta_tags
   %body
     .container
@@ -15,15 +16,15 @@
               %span.icon-bar
               %span.icon-bar
               %span.icon-bar
-            %a.navbar-brand{:href => "#"} Deck Devil
+            %a.navbar-brand{:href => "#"} DeckDevil
           #navbar.navbar-collapse.collapse
             %ul.nav.navbar-nav
-              %li{ class: "#{current_page?(blog_articles_path) ? 'active' : ''}" }
-                = link_to "Blog", blog_articles_path
               %li{ class: "#{current_page?(decks_path) ? 'active' : ''}" }
                 = link_to decks_path do
                   Browse decks
                   .label.label-info Coming soon
+              %li{ class: "#{current_page?(blog_articles_path) ? 'active' : ''}" }
+                = link_to "Blog", blog_articles_path
 
             -# %ul.nav.navbar-nav.navbar-right
             -#   = link_to "Sell your deck", new_deck_path, class: "btn btn-default navbar-btn pull-left extra-margin-right"
